@@ -12,19 +12,13 @@ jobs:
       contents: read
       id-token: write
 
-    strategy:
-      matrix:
-        package:
-          - packages/add
-          - packages/calc
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Publish package (dry run)
-        run: npx jsr publish --dry-run
-        working-directory: ${{ matrix.package }}
-
-      - name: Publish package
+      - name: Publish package add
         run: npx jsr publish
-        working-directory: ${{ matrix.package }}
+        working-directory: packages/add
+
+      - name: Publish package calc
+        run: npx jsr publish
+        working-directory: packages/calc
