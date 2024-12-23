@@ -24,3 +24,7 @@ jobs:
       - name: Publish package (dry run)
         run: npx jsr publish --dry-run
         working-directory: ${{ matrix.package }}
+
+      - name: Publish package
+        run: npx jsr publish
+        working-directory: ${{ matrix.package }}
