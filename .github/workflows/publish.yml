@@ -1,0 +1,26 @@
+name: Publish
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    strategy:
+      matrix:
+        package:
+          - packages/add
+          - packages/calc
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish package (dry run)
+        run: npx jsr publish --dry-run
+        working-directory: ${{ matrix.package }}
